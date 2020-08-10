@@ -19,11 +19,19 @@ const App = (props) => {
 
   return (
     <div>
-      {props.anecdotes[selected]}
-      <p>has {votes[selected]} votes</p>
-      <Button text="vote" click={() => setVotes(addVote(selected))} />
-      <Button text="next anecdote" click={() => setSelected(Math.floor((Math.random() * 10) + 1) 
-        % props.anecdotes.length)}/>
+      <div>
+        <h1>Anecdote of The Day</h1>
+        {props.anecdotes[selected]}
+        <p>has {votes[selected]} votes</p>
+        <Button text="vote" click={() => setVotes(addVote(selected))} />
+        <Button text="next anecdote" click={() => setSelected(Math.floor((Math.random() * 10) + 1) 
+          % props.anecdotes.length)}/>
+      </div>
+      <div>
+        <h1>Most popular anecdote</h1>
+        {props.anecdotes[votes.indexOf(Math.max(...votes))]}
+        <p>has {Math.max(...votes)} votes</p>
+      </div>
     </div>
   )
 }
