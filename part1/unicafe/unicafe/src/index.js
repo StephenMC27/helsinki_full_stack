@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const Button = ({ text }) => <button>{text}</button>
+
 const Statistic = ({ text, value }) => {
   return (
     <div>
