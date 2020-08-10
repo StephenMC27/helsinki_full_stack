@@ -5,15 +5,16 @@ const Button = ({ text, click }) => <button onClick={click}>{text}</button>
 
 const Statistic = ({ text, value }) => {
   return (
-    <div>
-      <p>{text} {value}</p>
-    </div>
+    <tr>
+      <td>{text}</td> 
+      <td>{value}</td>
+    </tr>
   )
 }
 
 const Statistics = ({ good, neutral, bad }) => {
   const totalReviews = good + neutral + bad
-  const averageScore = () => (good + bad * -1) / (totalReviews)
+  const averageScore = () => (good - bad) / (totalReviews)
   const percentPositive = () => (good / totalReviews) * 100
 
   if (totalReviews === 0) {
@@ -27,12 +28,16 @@ const Statistics = ({ good, neutral, bad }) => {
   return  (
     <div>
       <h1>statistics</h1>
-      <Statistic text="good" value={good} />
-      <Statistic text="neutral" value={neutral}/>
-      <Statistic text="bad" value={bad}/>
-      <Statistic text="all" value={totalReviews}/>
-      <Statistic text="average" value={averageScore()}/>
-      <Statistic text="positive" value={percentPositive() + '%'}/>
+      <table>
+        <tbody>
+          <Statistic text="good" value={good} />
+          <Statistic text="neutral" value={neutral}/>
+          <Statistic text="bad" value={bad}/>
+          <Statistic text="all" value={totalReviews}/>
+          <Statistic text="average" value={averageScore()}/>
+          <Statistic text="positive" value={percentPositive() + '%'}/>
+        </tbody>
+      </table>
     </div>
   )
 }
