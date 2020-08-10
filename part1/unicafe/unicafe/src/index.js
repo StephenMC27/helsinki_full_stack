@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const Button = ({ text }) => <button>{text}</button>
+const Button = ({ text, click }) => <button onClick={click}>{text}</button>
 
 const Statistic = ({ text, value }) => {
   return (
@@ -32,7 +32,7 @@ const Statistics = ({ good, neutral, bad }) => {
       <Statistic text="bad" value={bad}/>
       <Statistic text="all" value={totalReviews}/>
       <Statistic text="average" value={averageScore()}/>
-      <Statistic text="positive" value={percentPositive()}/>
+      <Statistic text="positive" value={percentPositive() + '%'}/>
     </div>
   )
 }
@@ -46,6 +46,9 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
+      <Button text="good" click={() => setGood(good + 1)} />
+      <Button text="neutral" click={() => setNeutral(neutral + 1)} />
+      <Button text="bad" click={() => setBad(bad + 1)} />
       <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   )
