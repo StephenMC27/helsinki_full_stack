@@ -1,12 +1,5 @@
 import React, { useState } from 'react'
-
-const Filter = ({ filter, filterCb }) => {
-  return (
-    <div>
-      Search entries: <input onChange={filterCb} value={filter}/>
-    </div>
-  )
-}
+import Filter from './components/Filter'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
