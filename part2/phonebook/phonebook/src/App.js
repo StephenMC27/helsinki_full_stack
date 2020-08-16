@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Filter from './components/Filter'
+import PersonForm from  './components/PersonForm'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
@@ -31,12 +32,10 @@ const App = () => {
   }
 
   const handleNameChange = (event) => {
-    console.log(event.target.value)
     setNewName(event.target.value)
   }
 
   const handleNumberChange = (event) => {
-    console.log(event.target.value)
     setNewNumber(event.target.value)
   }
 
@@ -48,18 +47,9 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Filter filter={searchSequence} filterCb={handleSearchInput} />
-      <h2>Add a number</h2>
-      <form onSubmit={addEntry}>
-        <div>
-          name: <input onChange={handleNameChange} value={newName} />
-        </div>
-        <div>
-          number: <input onChange={handleNumberChange} value={newNumber} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <h3>Add a number</h3>
+      <PersonForm name={newName} number={newNumber} nameChange={handleNameChange} 
+        numberChange={handleNumberChange} submit={addEntry} />
       <h2>Numbers</h2>
       {persons
         .filter(person => searchSequence.length === 0 || 
