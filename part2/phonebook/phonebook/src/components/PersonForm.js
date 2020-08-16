@@ -17,4 +17,4 @@ const PersonFrom = ({ name, number, nameChange, numberChange, submit}) => {
     )
 }
 
-export default PersonFrom;
+export default PersonFrom
