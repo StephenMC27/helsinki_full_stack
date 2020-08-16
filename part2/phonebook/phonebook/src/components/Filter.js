@@ -8,4 +8,4 @@ const Filter = ({ filter, filterCb }) => {
   )
 }
 
-  export default Filter
+export default Filter
