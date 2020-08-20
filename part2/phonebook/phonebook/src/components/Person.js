@@ -3,9 +3,9 @@ import DeleteButton from './DeleteButton'
 
 const Person = ({ name, number, deleteCb }) => {
   return (
-    <div>{name} 
-      {number}
-      <DeleteButton name={name} deleteCb={deleteCb} />
+    <div>
+      {name} {number}
+      <DeleteButton name={name} click={deleteCb} />
     </div>
   )
 }

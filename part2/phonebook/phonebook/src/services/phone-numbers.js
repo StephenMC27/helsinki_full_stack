@@ -31,6 +31,7 @@ const removeNumber = (id) => {
       .then(response => response.data)
   )
 }
+  
 
 export default {
   getNumbers,

@@ -25,19 +25,28 @@ const App = () => {
     if (isDuplicateName(newName)) {
       window.alert(`${newName} is already added to the phonebook.`);
     } else {
-      const nameObject = {name: newName, number: newNumber}
+      const personObject = {name: newName, number: newNumber}
       phoneNumbers
-        .addNumber(nameObject)
-        .then(returnedNumber => {
-          setPersons(persons.concat(returnedNumber))
+        .addNumber(personObject)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
         })
       setNewName('')
       setNewNumber('')
     }
   }
 
-  const deleteEntry = (id) => {
-
+  const deleteEntry = (event, id) => {
+    event.preventDefault()
+    const deleted = persons.find(person => person.id === id)
+    if (window.confirm(`Delete ${deleted.name} ?`)) {
+      phoneNumbers
+        .removeNumber(id)
+        .then(response => {
+          setPersons(persons.filter(person => person.id !== id))
+          console.log('persons', persons)
+        })
+    }
   }
 
   const isDuplicateName = (name) => {
