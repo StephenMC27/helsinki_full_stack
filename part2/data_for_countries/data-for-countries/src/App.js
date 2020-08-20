@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import Filter from './components/Filter'
 import axios from 'axios'
 
 const App = () => {
-  const [ countries, setCountries ] = useState([])
-  const [ filter, setFilter ] = useState('')
+  const [ countries, setCountries ] = useState([]) //array of JSON objects from RestCountries API
+  const [ filter, setFilter ] = useState('')  //holds user input for country search
 
+  //makes request to RestCountries API and pulls in JSON data
   useEffect(() => {
+    console.log('effect')
     axios
       .get('https://restcountries.eu/rest/v2/all')
       .then(response => {
@@ -13,6 +16,7 @@ const App = () => {
         setCountries(response.data)
       })
   }, [])
+  console.log('recieved', countries.length, 'countries')
 
   const handleFilterChange = (event) => {
     console.log(event.target.value)
@@ -20,9 +24,9 @@ const App = () => {
   }
 
   return (
-    <form>
-      find countries: <input onChange={handleFilterChange} value={filter}/>
-    </form>
+    <div>
+      <Filter filter={filter} filterCallback={handleFilterChange} />
+    </div>
   )
 }
 
