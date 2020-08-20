@@ -36,6 +36,10 @@ const App = () => {
     }
   }
 
+  const deleteEntry = (id) => {
+
+  }
+
   const isDuplicateName = (name) => {
     const names = persons.map(person => person.name)
     return names.includes(name)
@@ -61,7 +65,7 @@ const App = () => {
       <PersonForm name={newName} number={newNumber} nameChange={handleNameChange} 
         numberChange={handleNumberChange} submit={addEntry} />
       <h2>Numbers</h2>
-      <Persons persons={persons} searchSequence={searchSequence} />
+      <Persons persons={persons} searchSequence={searchSequence} deleteCb={deleteEntry} />
     </div>
   )
 }
