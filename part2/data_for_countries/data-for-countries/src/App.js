@@ -19,24 +19,6 @@ const App = () => {
   }, [])
   console.log('recieved', countries.length, 'countries')
 
-  // useEffect(() => {
-  //   console.log('weather effect')
-  //   const api_key = process.env.REACT_APP_API_KEY
-  //   const request_url = 'http://api.weatherstack.com/current?access_key=' + api_key + '&query=' + filter
-  //   if (filter) {
-  //     axios
-  //     .get(request_url)
-  //     .then(response => {
-  //       console.log('weather response received')
-  //       console.log(response.data)
-  //       if (response.data.success !== false) {
-  //         setWeather(response.data)
-  //         console.log('weather set to ', response.data)
-  //       }
-  //     })
-  //   }
-  // }, [filter])
-
   const handleFilterChange = (event) => {
     console.log(event.target.value)
     setFilter(event.target.value)
