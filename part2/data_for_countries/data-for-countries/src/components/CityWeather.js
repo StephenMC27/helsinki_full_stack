@@ -10,7 +10,8 @@ const CityWeather = ({ city }) => {
   useEffect(() => {
     const params ={
       access_key: process.env.REACT_APP_API_KEY,
-      query: city
+      query: city,
+      units: 'f'
     }
     axios
       .get('http://api.weatherstack.com/current', {params})
@@ -27,7 +28,7 @@ const CityWeather = ({ city }) => {
         weather 
         ?
         <div>
-          <p><strong>Temperature:</strong> {weather.temperature} Celcius</p>
+          <p><strong>Temperature:</strong> {weather.temperature} Fahrenheit</p>
           <img src={weather.weather_icons[0]} alt="WEATHER ICON" />
           <p><strong>Wind:</strong> {weather.wind_speed} mph direction {weather.wind_dir}</p>
         </div>
