@@ -1,7 +1,7 @@
 import React from 'react'
 import CountryDetails from './CountryDetails'
 
-const CountryList = ({ countries, filter }) => { 
+const CountryList = ({ countries, filter, showCallback }) => { 
   //apply filter to countries array
   const countriesToDisplay = countries.filter(country => filter.length === 0 ||
     country.name.toLowerCase().includes(filter.toLowerCase()))
@@ -16,7 +16,11 @@ const CountryList = ({ countries, filter }) => {
       )
     } else {
       return (
-        countriesToDisplay.map(country => <div key={country.name}>{country.name}</div>)  //display only country names
+        countriesToDisplay.map(country => 
+          <div key={country.name}>{country.name}
+            <button style={{marginLeft: 10}} onClick={() => showCallback(country.name)}>Show</button>
+          </div>)
+        
       )
     }
 }
