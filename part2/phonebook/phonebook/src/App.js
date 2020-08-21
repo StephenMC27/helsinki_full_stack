@@ -11,7 +11,7 @@ const App = () => {
   const [ searchSequence, setSearchSequence ] = useState('')
 
   useEffect(() => {
-    numberService
+    phoneNumbers
       .getNumbers()
       .then(allNumbers => {
         setPersons(allNumbers)
