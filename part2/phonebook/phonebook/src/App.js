@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from  './components/PersonForm'
 import Persons from './components/Persons'
-import numberService from './services/phone-numbers'
 import phoneNumbers from './services/phone-numbers'
-//import axios from 'axios'
 
 const App = () => {
   const [ persons, setPersons ] = useState([]) 
