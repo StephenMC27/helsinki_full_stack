@@ -16,10 +16,10 @@ const addNumber = newNumber => {
   )
 }
 
-const changeNumber = (id, newNumber) => {
+const changeNumber = (newObject) => {
   return (
     axios
-      .put(`http://localhost:3001/persons/${id}`, newNumber)
+      .put(`http://localhost:3001/persons/${newObject.id}`, newObject)
       .then(response => response.data)
   )
 }

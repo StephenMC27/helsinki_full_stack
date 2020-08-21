@@ -10,4 +10,4 @@ const Person = ({ name, number, deleteCb }) => {
   )
 }
 
-export default Person
+export default Person;

@@ -23,7 +23,10 @@ const App = () => {
   const addEntry = (event) => {
     event.preventDefault()
     if (isDuplicateName(newName)) {
-      window.alert(`${newName} is already added to the phonebook.`);
+      if (window
+        .confirm(`${newName} is already added to the phonebook. Would you like to update their number?`)) {
+          updateNumber(newName, newNumber)
+      }
     } else {
       const personObject = {name: newName, number: newNumber}
       phoneNumbers
@@ -34,6 +37,17 @@ const App = () => {
       setNewName('')
       setNewNumber('')
     }
+  }
+
+  const updateNumber = (name, number) => {
+    const existingPerson = persons.find(person => person.name === name)
+    const newPerson = {...existingPerson, number}
+    phoneNumbers
+      .changeNumber(newPerson)
+      .then(updatedPerson => {
+        console.log('updatedPerson', updatedPerson)
+        setPersons(persons.map(person => person.id !== updatedPerson.id ? person : updatedPerson))
+      })
   }
 
   const deleteEntry = (event, id) => {
