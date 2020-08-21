@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from  './components/PersonForm'
 import Persons from './components/Persons'
-import Message from './components/Message'
+import SuccessMessage from './components/SuccessMessage'
 import phoneNumbers from './services/phone-numbers'
+import ErrorMessage from './components/ErrorMessage'
 
 const App = () => {
   const [ persons, setPersons ] = useState([]) 
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ searchSequence, setSearchSequence ] = useState('')
-  const [ message, setMessage ] = useState(null)
+  const [ successMessage, setSuccessMessage ] = useState(null)
+  const [ errorMessage, setErrorMessage ] = useState(null)
 
   useEffect(() => {
     phoneNumbers
@@ -33,9 +35,9 @@ const App = () => {
         .addNumber(personObject)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
-          setMessage(`Added ${returnedPerson.name} to the phonebook.`)
+          setSuccessMessage(`Added ${returnedPerson.name} to the phonebook.`)
           setTimeout(() => {
-            setMessage(null)
+            setSuccessMessage(null)
           }, 5000)
         })
       setNewName('')
@@ -51,9 +53,15 @@ const App = () => {
       .then(updatedPerson => {
         console.log('updatedPerson', updatedPerson)
         setPersons(persons.map(person => person.id !== updatedPerson.id ? person : updatedPerson))
-        setMessage(`Updated phone number for ${updatedPerson.name}`)
+        setSuccessMessage(`Updated phone number for ${updatedPerson.name}`)
         setTimeout(() => {
-          setMessage(null)
+          setSuccessMessage(null)
+        }, 5000)
+      })
+      .catch(error => {
+        setErrorMessage(`${existingPerson.name} has already been removed from the server. Please refresh the page.`)
+        setTimeout(() => {
+          setErrorMessage(null)
         }, 5000)
       })
   }
@@ -66,9 +74,15 @@ const App = () => {
         .removeNumber(id)
         .then(response => {
           setPersons(persons.filter(person => person.id !== id))
-          setMessage(`Deleted ${deleted.name} from phone book.`)
+          setSuccessMessage(`Deleted ${deleted.name} from phone book.`)
           setTimeout(() => {
-            setMessage(null)
+            setSuccessMessage(null)
+          }, 5000)
+        })
+        .catch(error => {
+          setErrorMessage(`${deleted.name} has already been removed from the server. Please refresh the page.`)
+          setTimeout(() => {
+            setErrorMessage(null)
           }, 5000)
         })
     }
@@ -94,7 +108,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Message message={message} />
+      <SuccessMessage message={successMessage} />
+      <ErrorMessage message={errorMessage} />
       <Filter filter={searchSequence} filterCb={handleSearchInput} />
       <h3>Add a number</h3>
       <PersonForm name={newName} number={newNumber} nameChange={handleNameChange} 

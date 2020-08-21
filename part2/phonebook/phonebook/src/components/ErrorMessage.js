@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Message = ({ message }) => {
-  const messageStyle = {
-    color: 'green',
+const ErrorMessage = ({ message }) => {
+  const errorStyle = {
+    color: 'red',
     fontSize: 20,
     fontStyle: 'bold',
     background: 'lightgrey',
-    borderColor: 'green',
+    borderColor: 'red',
     borderStyle: 'solid',
     borderRadius: 5,
     padding: 10,
@@ -18,10 +18,10 @@ const Message = ({ message }) => {
   }
 
   return (
-    <div style={messageStyle}>
+    <div style={errorStyle}>
       {message}
     </div>
   )
 }
 
-export default Message;
+export default ErrorMessage;
