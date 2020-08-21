@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from  './components/PersonForm'
 import Persons from './components/Persons'
+import Message from './components/Message'
 import phoneNumbers from './services/phone-numbers'
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ searchSequence, setSearchSequence ] = useState('')
+  const [ message, setMessage ] = useState(null)
 
   useEffect(() => {
     phoneNumbers
@@ -31,6 +33,10 @@ const App = () => {
         .addNumber(personObject)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
+          setMessage(`Added ${returnedPerson.name} to the phonebook.`)
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
         })
       setNewName('')
       setNewNumber('')
@@ -45,6 +51,10 @@ const App = () => {
       .then(updatedPerson => {
         console.log('updatedPerson', updatedPerson)
         setPersons(persons.map(person => person.id !== updatedPerson.id ? person : updatedPerson))
+        setMessage(`Updated phone number for ${updatedPerson.name}`)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
       })
   }
 
@@ -56,7 +66,10 @@ const App = () => {
         .removeNumber(id)
         .then(response => {
           setPersons(persons.filter(person => person.id !== id))
-          console.log('persons', persons)
+          setMessage(`Deleted ${deleted.name} from phone book.`)
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
         })
     }
   }
@@ -81,6 +94,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Message message={message} />
       <Filter filter={searchSequence} filterCb={handleSearchInput} />
       <h3>Add a number</h3>
       <PersonForm name={newName} number={newNumber} nameChange={handleNameChange} 
